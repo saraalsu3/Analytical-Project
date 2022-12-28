@@ -1,0 +1,34 @@
+/*Q1 Which are 3 top geners have highest sales*/
+SELECT G.name, COUNT(T.TrackId) AS Gener_Sold
+FROM Genre G
+JOIN Track T
+ON G.GenreId = T.GenreId
+JOIN InvoiceLine IL
+ON IL.TrackId = T.TrackId
+GROUP BY G.name
+ORDER BY Gener_Sold DESC
+LIMIT 3;
+/*Q2 What are the top 5 Albums that have highest sales*/
+SELECT A.Title Albums, count(T.TrackId) AS sales
+FROM Album A
+JOIN Track T
+ON A.AlbumId = T.AlbumId
+GROUP BY Albums
+ORDER BY sales DESC
+LIMIT 5;
+/*Q3 Top 5 total Sale amount per Country*/
+SELECT C.Country, Count(I.InvoiceId) AS sales
+from Customer C
+Join Invoice I
+on C.CustomerId=I.CustomerId
+GROUP BY C.Country
+ORDER BY sales DESC
+LIMIT 5;
+/*Q4 Who are the top 5 customers who make the most purchases? */
+SELECT A.Name AS Artist_Name, COUNT(B.Title) as No_Albums
+FROM Artist A
+JOIN Album B
+on A.ArtistId=B.ArtistId
+GROUP by Artist_Name
+ORDER by No_Albums DESC
+LIMIT 5;
